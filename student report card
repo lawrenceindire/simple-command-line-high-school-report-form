@@ -1,0 +1,65 @@
+# Import the necessary libraries
+import pandas as pd
+
+# Create an empty DataFrame to store student data
+student_data = pd.DataFrame()
+
+# Collect student information
+#collect relevant data
+while True:
+    # Get student name
+    student_name = input("Enter student name: ")
+
+    # Get student marks for each subject
+    # Get more student marks per subject and add more subjects
+    math_marks = int(input("Enter math marks: "))
+    science_marks = int(input("Enter science marks: "))
+    english_marks = int(input("Enter english marks: "))
+
+    # Calculate total marks
+    total_marks = math_marks + science_marks + english_marks
+
+    # Calculate average marks
+    average_marks = total_marks / 3
+
+    # Create a dictionary to store student information
+    student_info = {
+        "Name": student_name,
+        "Math Marks": math_marks,
+        "Science Marks": science_marks,
+        "English Marks": english_marks,
+        "Total Marks": total_marks,
+        "Average Marks": average_marks
+    }
+
+    # Append student information to DataFrame
+    student_data = student_data.append(student_info, ignore_index=True)
+
+    # Check if user wants to add more students
+    more_students = input("Enter more students? (y/n): ")
+    if more_students.lower() != "y":
+        break
+
+# Calculate student positions
+student_data = student_data.sort_values(by="Total Marks", ascending=False)
+student_data["Position"] = range(1, len(student_data) + 1)
+
+# Generate report cards
+for index, row in student_data.iterrows():
+    student_name = row["Name"]
+    math_marks = row["Math Marks"]
+    science_marks = row["Science Marks"]
+    english_marks = row["English Marks"]
+    total_marks = row["Total Marks"]
+    average_marks = row["Average Marks"]
+    position = row["Position"]
+
+    print("*Student Report Card*")
+    print("Student Name:", student_name)
+    print("Math Marks:", math_marks)
+    print("Science Marks:", science_marks)
+    print("English Marks:", english_marks)
+    print("Total Marks:", total_marks)
+    print("Average Marks:", average_marks)
+    print("Position:", position)
+    print()
